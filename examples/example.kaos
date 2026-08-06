@@ -1,0 +1,17 @@
+goal ProtectData { informalDef = "The data shall be protected" }
+requirement EncryptData { formalDef = "DataIsEncrypted" }
+object Data
+action Encrypt
+agent EncryptionService { realm = "software" }
+
+EncryptData reduces ProtectData
+ProtectData concerns Data
+Data ensures EncryptData
+Encrypt operationalizes EncryptData
+EncryptionService is responsible for EncryptData
+EncryptionService performs Encrypt
+EncryptionService is capable of Encrypt
+EncryptionService monitors Data
+EncryptionService controls Data
+Encrypt has input Data
+Encrypt has output Data
