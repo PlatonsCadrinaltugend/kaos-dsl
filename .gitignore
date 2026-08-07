@@ -34,4 +34,3 @@ metals.sbt
 .idea_modules
 /.worksheet/
 
-src/test/scala/kaos/KaosDslSuite.scala
