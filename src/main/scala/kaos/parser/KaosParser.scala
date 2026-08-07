@@ -9,7 +9,7 @@ class KaosParser(val input: ParserInput) extends Parser:
 
     def Input: Rule1[KaosModel] = rule:
         WhiteSpace ~
-            oneOrMore(Declaration).separatedBy(RequiredWhiteSpace) ~
+            zeroOrMore(Declaration).separatedBy(RequiredWhiteSpace) ~
             WhiteSpace ~
             EOI ~>
             ((declarations: Seq[ParsedDeclaration]) =>
