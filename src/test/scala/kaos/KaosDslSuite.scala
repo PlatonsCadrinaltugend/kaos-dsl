@@ -120,6 +120,17 @@ class KaosDslSuite extends munit.FunSuite:
 
         assertEquals(errors, Vector.empty)
     }
+    test("rejects reserved keywords as identifiers") {
+        assert(parsingFails("goal goal"))
+        assert(parsingFails("goal performs"))
+        assert(parsingFails("goal realm"))
+    }
+    test("allows parts of multi-word relationship phrases as identifiers") {
+        assert(!parsingFails("goal is"))
+        assert(!parsingFails("goal responsible"))
+        assert(!parsingFails("goal has"))
+        assert(!parsingFails("goal input"))
+    }
 // testing elements
     test("parses an element declaration") {
         val model =
