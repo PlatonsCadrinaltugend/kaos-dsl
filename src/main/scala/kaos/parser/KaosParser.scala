@@ -46,10 +46,11 @@ class KaosParser(val input: ParserInput) extends Parser:
             )
 
     def Identifier: Rule1[String] = rule:
-        capture(
-          CharPredicate.Alpha ~
-              zeroOrMore(CharPredicate.AlphaNum | '_')
-        )
+        !ReservedKeyword ~
+            capture(
+              CharPredicate.Alpha ~
+                  zeroOrMore(CharPredicate.AlphaNum | '_')
+            )
 
     def WhiteSpace: Rule0 = rule:
         zeroOrMore(anyOf(" \t\r\n"))
@@ -197,3 +198,31 @@ class KaosParser(val input: ParserInput) extends Parser:
             index += 1
 
         SourceLocation(line, column)
+    def ReservedKeyword: Rule0 = rule:
+        (
+          "goal" |
+              "requisite" |
+              "requirement" |
+              "assumption" |
+              "object" |
+              "entity" |
+              "event" |
+              "action" |
+              "agent" |
+              "obstacle" |
+              "reduces" |
+              "conflicts" |
+              "concerns" |
+              "ensures" |
+              "operationalizes" |
+              "is responsible for" |
+              "performs" |
+              "is capable of" |
+              "monitors" |
+              "controls" |
+              "has input" |
+              "has output"
+        ) ~ !IdentifierChar
+
+    def IdentifierChar: Rule0 = rule:
+        CharPredicate.AlphaNum ++ "_"
