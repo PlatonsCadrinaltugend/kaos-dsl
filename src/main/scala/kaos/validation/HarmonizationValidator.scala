@@ -50,7 +50,7 @@ object HarmonizationValidator:
     ): Vector[ValidationError] =
         model.relationships
             .groupBy { relationship =>
-                (
+                unorderedPair(
                   relationship.sourceId,
                   relationship.targetId
                 )
@@ -221,3 +221,10 @@ object HarmonizationValidator:
         (
           firstRelationship.sourceId +: remainingParts
         ).mkString(" ")
+
+    private def unorderedPair(
+        firstId: String,
+        secondId: String
+    ): (String, String) =
+        if firstId <= secondId then (firstId, secondId)
+        else (secondId, firstId)

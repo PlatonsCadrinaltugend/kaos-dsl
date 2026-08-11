@@ -1,17 +1,33 @@
-goal ProtectData { informalDef = "The data shall be protected" }
-requirement EncryptData { formalDef = "DataIsEncrypted" }
-object Data
-action Encrypt
-agent EncryptionService { realm = "software" }
+goal ImproveHealth {
+    informalDef = "Users shall improve their long-term health"
+}
 
-EncryptData reduces ProtectData
-ProtectData concerns Data
-Data ensures EncryptData
-Encrypt operationalizes EncryptData
-EncryptionService is responsible for EncryptData
-EncryptionService performs Encrypt
-EncryptionService is capable of Encrypt
-EncryptionService monitors Data
-EncryptionService controls Data
-Encrypt has input Data
-Encrypt has output Data
+goal ProvidePersonalizedRecommendations {
+    informalDef = "Users shall receive personalized health recommendations"
+}
+
+requirement GenerateRecommendations {
+    informalDef = "The system shall generate personalized health recommendations"
+}
+
+object HealthData
+object HealthRecommendation
+
+action GenerateHealthRecommendation
+
+agent HealthAdvisor {
+    realm = "software"
+}
+
+GenerateRecommendations reduces ProvidePersonalizedRecommendations
+ProvidePersonalizedRecommendations reduces ImproveHealth
+
+GenerateHealthRecommendation operationalizes GenerateRecommendations
+
+HealthAdvisor is responsible for GenerateRecommendations
+HealthAdvisor performs GenerateHealthRecommendation
+
+GenerateHealthRecommendation has input HealthData
+GenerateHealthRecommendation has output HealthRecommendation
+
+ProvidePersonalizedRecommendations concerns HealthRecommendation

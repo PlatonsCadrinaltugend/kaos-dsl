@@ -4,6 +4,8 @@ import java.nio.file.{Files, Path}
 import kaos.model.*
 import kaos.parser.KaosParser
 import kaos.validation.Validator
+import kaos.visualizer.AstVisualizer
+
 import org.parboiled2.ParseError
 
 import scala.util.{Failure, Success}
@@ -14,6 +16,11 @@ def runKaosDsl(arguments: String*): Unit =
         arguments.headOption.getOrElse("examples/example.kaos")
 
     val path = Path.of(filePath)
+
+    val visualizationPath =
+        Option(path.getParent)
+            .getOrElse(Path.of("."))
+            .resolve("ast.png")
 
     if !Files.exists(path) then
         println(s"Input file '$filePath' does not exist.")
@@ -26,6 +33,11 @@ def runKaosDsl(arguments: String*): Unit =
 
         parser.Input.run() match
             case Success(model) =>
+                AstVisualizer.createVisualizations(
+                  model,
+                  visualizationPath
+                )
+
                 val errors =
                     Validator.validate(model)
 
@@ -59,9 +71,7 @@ private def printSuccessfulModel(
         )
 
         element.properties.foreach { property =>
-            println(
-              s"""    ${propertyName(property.name)} = "${property.value}""""
-            )
+            println(s"""    ${property.name.syntax} = "${property.value}"""")
         }
     }
 
@@ -76,11 +86,3 @@ private def printSuccessfulModel(
         )
     }
     println()
-
-private def propertyName(
-    propertyName: PropertyName
-): String =
-    propertyName match
-        case PropertyName.InformalDef => "informalDef"
-        case PropertyName.FormalDef   => "formalDef"
-        case PropertyName.Realm       => "realm"
