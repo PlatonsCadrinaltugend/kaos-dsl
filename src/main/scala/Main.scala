@@ -20,7 +20,7 @@ def runKaosDsl(arguments: String*): Unit =
     val visualizationPath =
         Option(path.getParent)
             .getOrElse(Path.of("."))
-            .resolve("ast.png")
+            .resolve("ast.svg")
 
     if !Files.exists(path) then
         println(s"Input file '$filePath' does not exist.")

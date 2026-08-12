@@ -32,7 +32,7 @@ object AstVisualizer:
         writeAndRender(
           modelToUmlDot(model),
           parent.resolve(s"${baseName}_uml.dot"),
-          parent.resolve(s"${baseName}_uml.png")
+          parent.resolve(s"${baseName}_uml.svg")
         )
 
     private def writeAndRender(
@@ -271,7 +271,7 @@ object AstVisualizer:
         val process =
             new ProcessBuilder(
               "dot",
-              "-Tpng",
+              "-Tsvg",
               dotPath.toString,
               "-o",
               imagePath.toString
