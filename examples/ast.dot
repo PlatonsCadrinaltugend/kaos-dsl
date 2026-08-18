@@ -6,19 +6,11 @@ digraph KaosAST {
     model [label="KaosModel"];
 
     element0 [
-        label="ElementNode\nelementType = Goal\nid = goal1\nlocation = 1:1"
+        label="ElementNode\nelementType = Goal\nid = a\nlocation = 1:1"
     ];
 
     model -> element0 [
         label="elements"
-    ];
-
-    property0_0 [
-        label="PropertyAssignment\nname = Name\nvalue = goal\nlocation = 2:5"
-    ];
-
-    element0 -> property0_0 [
-        label="properties"
     ];
 
 }

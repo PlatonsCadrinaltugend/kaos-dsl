@@ -13,5 +13,5 @@ lazy val root = project
       libraryDependencies += "org.parboiled" %% "parboiled" % "2.5.1",
 
       Compile / unmanagedSourceDirectories +=
-          baseDirectory.value / "visualizer"
+          baseDirectory.value / "src" / "visualizer"
     )

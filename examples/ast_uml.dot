@@ -12,7 +12,7 @@ digraph KaosUmlProfile {
     node [shape=plain];
     edge [fontsize=10];
 
-    "goal1" [
+    "a" [
         label=
 <
 <TABLE BORDER="1"
@@ -25,13 +25,9 @@ digraph KaosUmlProfile {
 </TR>
 
     <TR>
-        <TD><B>goal1</B></TD>
+        <TD><B>a</B></TD>
     </TR>
     
-<TR>
-    <TD ALIGN="LEFT">{name = goal}</TD>
-</TR>
-
 </TABLE>
 >
 
