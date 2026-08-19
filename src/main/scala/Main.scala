@@ -4,7 +4,6 @@ import java.nio.file.{Files, Path}
 import kaos.model.*
 import kaos.parser.KaosParser
 import kaos.validation.Validator
-import kaos.visualizer.AstVisualizer
 
 import org.parboiled2.ParseError
 
@@ -33,10 +32,7 @@ def runKaosDsl(arguments: String*): Unit =
 
         parser.Input.run() match
             case Success(model) =>
-                AstVisualizer.createVisualizations(
-                  model,
-                  visualizationPath
-                )
+                visualizeIfPossible(model, visualizationPath)
 
                 val errors =
                     Validator.validate(model)
@@ -86,3 +82,26 @@ private def printSuccessfulModel(
         )
     }
     println()
+
+private def visualizeIfPossible(
+    model: KaosModel,
+    outputPath: Path
+): Unit =
+    try
+        val classs =
+            Class.forName("kaos.visualizer.AstVisualizer$")
+
+        val instance =
+            classs.getField("MODULE$").get(null)
+
+        classs
+            .getMethod(
+              "createVisualizations",
+              classOf[KaosModel],
+              classOf[Path]
+            )
+            .invoke(instance, model, outputPath)
+
+    catch
+        case _: ClassNotFoundException =>
+            ()

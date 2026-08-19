@@ -12,7 +12,7 @@ digraph KaosUmlProfile {
     node [shape=plain];
     edge [fontsize=10];
 
-    "a" [
+    "ImproveHealth" [
         label=
 <
 <TABLE BORDER="1"
@@ -25,12 +25,210 @@ digraph KaosUmlProfile {
 </TR>
 
     <TR>
-        <TD><B>a</B></TD>
+        <TD><B>ImproveHealth</B></TD>
+    </TR>
+    
+<TR>
+    <TD ALIGN="LEFT">{informalDef = Users shall improve their long-term health}</TD>
+</TR>
+
+</TABLE>
+>
+
+    ];
+
+    "ProvidePersonalizedRecommendations" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;goal&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>ProvidePersonalizedRecommendations</B></TD>
+    </TR>
+    
+<TR>
+    <TD ALIGN="LEFT">{informalDef = Users shall receive personalized health recommendations}</TD>
+</TR>
+
+</TABLE>
+>
+
+    ];
+
+    "GenerateRecommendations" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;requirement&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>GenerateRecommendations</B></TD>
+    </TR>
+    
+<TR>
+    <TD ALIGN="LEFT">{informalDef = The system shall generate personalized health recommendations}</TD>
+</TR>
+
+</TABLE>
+>
+
+    ];
+
+    "HealthData" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;kobject&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>HealthData</B></TD>
     </TR>
     
 </TABLE>
 >
 
+    ];
+
+    "HealthRecommendation" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;kobject&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>HealthRecommendation</B></TD>
+    </TR>
+    
+</TABLE>
+>
+
+    ];
+
+    "GenerateHealthRecommendation" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;kaction&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>GenerateHealthRecommendation</B></TD>
+    </TR>
+    
+</TABLE>
+>
+
+    ];
+
+    "HealthAdvisor" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;kagent&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>HealthAdvisor</B></TD>
+    </TR>
+    
+<TR>
+    <TD ALIGN="LEFT">{realm = software}</TD>
+</TR>
+
+</TABLE>
+>
+
+    ];
+
+    "ProvidePersonalizedRecommendations" ->
+    "GenerateRecommendations" [
+        label="<<reduces>>",
+        style=dashed,
+        dir=none
+    ];
+
+    "ImproveHealth" ->
+    "ProvidePersonalizedRecommendations" [
+        label="<<reduces>>",
+        style=dashed,
+        dir=none
+    ];
+
+    "GenerateHealthRecommendation" ->
+    "GenerateRecommendations" [
+        label="<<operationalizes>>",
+        
+        dir=none
+    ];
+
+    "HealthAdvisor" ->
+    "GenerateRecommendations" [
+        label="<<responsibility>>",
+        
+        dir=none
+    ];
+
+    "HealthAdvisor" ->
+    "GenerateHealthRecommendation" [
+        label="<<performs>>",
+        
+        dir=none
+    ];
+
+    "GenerateHealthRecommendation" ->
+    "HealthData" [
+        label="<<input>>",
+        
+        dir=none
+    ];
+
+    "GenerateHealthRecommendation" ->
+    "HealthRecommendation" [
+        label="<<output>>",
+        
+        dir=none
+    ];
+
+    "ProvidePersonalizedRecommendations" ->
+    "HealthRecommendation" [
+        label="<<concerns>>",
+        
+        dir=none
     ];
 
 }

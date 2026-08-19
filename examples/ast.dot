@@ -6,11 +6,155 @@ digraph KaosAST {
     model [label="KaosModel"];
 
     element0 [
-        label="ElementNode\nelementType = Goal\nid = a\nlocation = 1:1"
+        label="ElementNode\nelementType = Goal\nid = ImproveHealth\nlocation = 1:1"
     ];
 
     model -> element0 [
         label="elements"
+    ];
+
+    property0_0 [
+        label="PropertyAssignment\nname = InformalDef\nvalue = Users shall improve their long-term health\nlocation = 2:5"
+    ];
+
+    element0 -> property0_0 [
+        label="properties"
+    ];
+
+    element1 [
+        label="ElementNode\nelementType = Goal\nid = ProvidePersonalizedRecommendations\nlocation = 5:1"
+    ];
+
+    model -> element1 [
+        label="elements"
+    ];
+
+    property1_0 [
+        label="PropertyAssignment\nname = InformalDef\nvalue = Users shall receive personalized health recommendations\nlocation = 6:5"
+    ];
+
+    element1 -> property1_0 [
+        label="properties"
+    ];
+
+    element2 [
+        label="ElementNode\nelementType = Requirement\nid = GenerateRecommendations\nlocation = 9:1"
+    ];
+
+    model -> element2 [
+        label="elements"
+    ];
+
+    property2_0 [
+        label="PropertyAssignment\nname = InformalDef\nvalue = The system shall generate personalized health recommendations\nlocation = 10:5"
+    ];
+
+    element2 -> property2_0 [
+        label="properties"
+    ];
+
+    element3 [
+        label="ElementNode\nelementType = Object\nid = HealthData\nlocation = 13:1"
+    ];
+
+    model -> element3 [
+        label="elements"
+    ];
+
+    element4 [
+        label="ElementNode\nelementType = Object\nid = HealthRecommendation\nlocation = 14:1"
+    ];
+
+    model -> element4 [
+        label="elements"
+    ];
+
+    element5 [
+        label="ElementNode\nelementType = Action\nid = GenerateHealthRecommendation\nlocation = 16:1"
+    ];
+
+    model -> element5 [
+        label="elements"
+    ];
+
+    element6 [
+        label="ElementNode\nelementType = Agent\nid = HealthAdvisor\nlocation = 18:1"
+    ];
+
+    model -> element6 [
+        label="elements"
+    ];
+
+    property6_0 [
+        label="PropertyAssignment\nname = Realm\nvalue = software\nlocation = 19:5"
+    ];
+
+    element6 -> property6_0 [
+        label="properties"
+    ];
+
+    relationship0 [
+        label="RelationshipNode\nrelationshipType = Reduces\nsourceId = GenerateRecommendations\ntargetId = ProvidePersonalizedRecommendations\nlocation = 22:1"
+    ];
+
+    model -> relationship0 [
+        label="relationships"
+    ];
+
+    relationship1 [
+        label="RelationshipNode\nrelationshipType = Reduces\nsourceId = ProvidePersonalizedRecommendations\ntargetId = ImproveHealth\nlocation = 23:1"
+    ];
+
+    model -> relationship1 [
+        label="relationships"
+    ];
+
+    relationship2 [
+        label="RelationshipNode\nrelationshipType = Operationalizes\nsourceId = GenerateHealthRecommendation\ntargetId = GenerateRecommendations\nlocation = 25:1"
+    ];
+
+    model -> relationship2 [
+        label="relationships"
+    ];
+
+    relationship3 [
+        label="RelationshipNode\nrelationshipType = Responsibility\nsourceId = HealthAdvisor\ntargetId = GenerateRecommendations\nlocation = 27:1"
+    ];
+
+    model -> relationship3 [
+        label="relationships"
+    ];
+
+    relationship4 [
+        label="RelationshipNode\nrelationshipType = Performs\nsourceId = HealthAdvisor\ntargetId = GenerateHealthRecommendation\nlocation = 28:1"
+    ];
+
+    model -> relationship4 [
+        label="relationships"
+    ];
+
+    relationship5 [
+        label="RelationshipNode\nrelationshipType = Input\nsourceId = GenerateHealthRecommendation\ntargetId = HealthData\nlocation = 30:1"
+    ];
+
+    model -> relationship5 [
+        label="relationships"
+    ];
+
+    relationship6 [
+        label="RelationshipNode\nrelationshipType = Output\nsourceId = GenerateHealthRecommendation\ntargetId = HealthRecommendation\nlocation = 31:1"
+    ];
+
+    model -> relationship6 [
+        label="relationships"
+    ];
+
+    relationship7 [
+        label="RelationshipNode\nrelationshipType = Concerns\nsourceId = ProvidePersonalizedRecommendations\ntargetId = HealthRecommendation\nlocation = 33:1"
+    ];
+
+    model -> relationship7 [
+        label="relationships"
     ];
 
 }
