@@ -12,7 +12,7 @@ import scala.util.{Failure, Success}
 @main
 def runKaosDsl(arguments: String*): Unit =
     val filePath =
-        arguments.headOption.getOrElse("examples/example.kaos")
+        arguments.headOption.getOrElse("examples/model.kaos")
 
     val path = Path.of(filePath)
 
