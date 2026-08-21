@@ -168,7 +168,13 @@ class KaosParser(val input: ParserInput) extends Parser:
             ("has input" ~
                 push(RelationshipType.Input)) |
             ("has output" ~
-                push(RelationshipType.Output))
+                push(RelationshipType.Output)) |
+            ("obstructs" ~
+                push(RelationshipType.Obstructs)) |
+            ("resolves" ~
+                push(RelationshipType.Resolves)) |
+            ("refines" ~
+                push(RelationshipType.Refines))
 
     def CurrentOffset: Rule1[Int] = rule:
         push(cursor)

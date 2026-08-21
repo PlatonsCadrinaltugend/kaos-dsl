@@ -131,3 +131,15 @@ object Validator:
             case RelationshipType.Input | RelationshipType.Output =>
                 sourceType == ElementType.Action &&
                 isObject(targetType)
+
+            case RelationshipType.Obstructs =>
+                sourceType == ElementType.Obstacle &&
+                (targetType == ElementType.Goal || isRequisite(targetType))
+
+            case RelationshipType.Refines =>
+                sourceType == ElementType.Obstacle &&
+                targetType == ElementType.Obstacle
+
+            case RelationshipType.Resolves =>
+                sourceType == ElementType.Requirement &&
+                targetType == ElementType.Obstacle

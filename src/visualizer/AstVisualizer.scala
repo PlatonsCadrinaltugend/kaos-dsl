@@ -149,7 +149,7 @@ object AstVisualizer:
               |    ];
               |
               |    node [shape=plain];
-              |    edge [fontsize=10];
+              |    edge [fontsize=16];
               |
               |""".stripMargin
         )
@@ -168,16 +168,15 @@ object AstVisualizer:
     private def umlElementNode(
         element: ElementNode
     ): String =
+        val stereotype =
+            umlStereotype(element.elementType)
+
         val stereotypeRow =
-            umlStereotype(element.elementType) match
-                case Some(stereotype) =>
-                    s"""
-                       |<TR>
-                       |    <TD>&lt;&lt;${escapeHtml(stereotype)}&gt;&gt;</TD>
-                       |</TR>
-                       |""".stripMargin
-                case None =>
-                    ""
+            s"""
+                    |<TR>
+                    |    <TD>&lt;&lt;${escapeHtml(stereotype)}&gt;&gt;</TD>
+                    |</TR>
+                    |""".stripMargin
 
         val tagRows =
             element.properties
@@ -186,10 +185,10 @@ object AstVisualizer:
                 }
                 .map { tag =>
                     s"""
-                       |<TR>
-                       |    <TD ALIGN="LEFT">{${escapeHtml(tag)}}</TD>
-                       |</TR>
-                       |""".stripMargin
+                    |<TR>
+                    |    <TD ALIGN="LEFT">{${wrapHtml(tag)}}</TD>
+                    |</TR>
+                    |""".stripMargin
                 }
                 .mkString("\n")
 
@@ -223,7 +222,8 @@ object AstVisualizer:
 
         val (source, target, style) =
             relationship.relationshipType match
-                case RelationshipType.Reduces =>
+                case RelationshipType.Reduces | RelationshipType.Resolves |
+                    RelationshipType.Refines | RelationshipType.Obstructs =>
                     (
                       relationship.targetId,
                       relationship.sourceId,
@@ -247,22 +247,20 @@ object AstVisualizer:
 
     private def umlStereotype(
         elementType: ElementType
-    ): Option[String] =
+    ): String =
         elementType match
             case ElementType.Object =>
-                Some("kobject")
+                "kobject"
             case ElementType.Entity =>
-                Some("kentity")
+                "kentity"
             case ElementType.Event =>
-                Some("kevent")
+                "kevent"
             case ElementType.Action =>
-                Some("kaction")
+                "kaction"
             case ElementType.Agent =>
-                Some("kagent")
-            case ElementType.Obstacle =>
-                None
+                "kagent"
             case other =>
-                Some(other.toString.toLowerCase)
+                other.toString.toLowerCase
 
     private def createImage(
         dotPath: Path,
@@ -302,3 +300,18 @@ object AstVisualizer:
             .replace("<", "&lt;")
             .replace(">", "&gt;")
             .replace("\"", "&quot;")
+
+    private def wrapHtml(
+        text: String,
+        maxLength: Int = 50
+    ): String =
+        text
+            .split(" ")
+            .foldLeft(Vector("")) { (lines, word) =>
+                if lines.last.length + word.length + 1 <= maxLength then
+                    lines.init :+ (lines.last + (if lines.last.isEmpty then ""
+                                                 else " ") + word)
+                else lines :+ word
+            }
+            .map(escapeHtml)
+            .mkString("<BR/>")

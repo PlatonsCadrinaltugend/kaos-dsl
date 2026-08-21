@@ -54,7 +54,7 @@ digraph KaosAST {
     ];
 
     element3 [
-        label="ElementNode\nelementType = Object\nid = HealthData\nlocation = 13:1"
+        label="ElementNode\nelementType = Action\nid = GenerateHealthRecommendation\nlocation = 13:1"
     ];
 
     model -> element3 [
@@ -62,7 +62,7 @@ digraph KaosAST {
     ];
 
     element4 [
-        label="ElementNode\nelementType = Object\nid = HealthRecommendation\nlocation = 14:1"
+        label="ElementNode\nelementType = Object\nid = HealthData\nlocation = 14:1"
     ];
 
     model -> element4 [
@@ -70,7 +70,7 @@ digraph KaosAST {
     ];
 
     element5 [
-        label="ElementNode\nelementType = Action\nid = GenerateHealthRecommendation\nlocation = 16:1"
+        label="ElementNode\nelementType = Object\nid = HealthRecommendation\nlocation = 15:1"
     ];
 
     model -> element5 [
@@ -91,6 +91,38 @@ digraph KaosAST {
 
     element6 -> property6_0 [
         label="properties"
+    ];
+
+    element7 [
+        label="ElementNode\nelementType = Obstacle\nid = InsufficientHealthData\nlocation = 35:1"
+    ];
+
+    model -> element7 [
+        label="elements"
+    ];
+
+    property7_0 [
+        label="PropertyAssignment\nname = InformalDef\nvalue = Insufficient health data prevents the generation of suitable recommendations\nlocation = 36:5"
+    ];
+
+    element7 -> property7_0 [
+        label="properties"
+    ];
+
+    element8 [
+        label="ElementNode\nelementType = Obstacle\nid = RecommendationsIgnored\nlocation = 39:1"
+    ];
+
+    model -> element8 [
+        label="elements"
+    ];
+
+    element9 [
+        label="ElementNode\nelementType = Requirement\nid = RequestAdditionalHealthData\nlocation = 41:1"
+    ];
+
+    model -> element9 [
+        label="elements"
     ];
 
     relationship0 [
@@ -154,6 +186,30 @@ digraph KaosAST {
     ];
 
     model -> relationship7 [
+        label="relationships"
+    ];
+
+    relationship8 [
+        label="RelationshipNode\nrelationshipType = Obstructs\nsourceId = InsufficientHealthData\ntargetId = GenerateRecommendations\nlocation = 43:1"
+    ];
+
+    model -> relationship8 [
+        label="relationships"
+    ];
+
+    relationship9 [
+        label="RelationshipNode\nrelationshipType = Obstructs\nsourceId = RecommendationsIgnored\ntargetId = ImproveHealth\nlocation = 44:1"
+    ];
+
+    model -> relationship9 [
+        label="relationships"
+    ];
+
+    relationship10 [
+        label="RelationshipNode\nrelationshipType = Resolves\nsourceId = RequestAdditionalHealthData\ntargetId = InsufficientHealthData\nlocation = 46:1"
+    ];
+
+    model -> relationship10 [
         label="relationships"
     ];
 

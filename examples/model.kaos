@@ -10,10 +10,10 @@ requirement GenerateRecommendations {
     informalDef = "The system shall generate personalized health recommendations"
 }
 
+action GenerateHealthRecommendation
 object HealthData
 object HealthRecommendation
 
-action GenerateHealthRecommendation
 
 agent HealthAdvisor {
     realm = "software"
@@ -31,3 +31,16 @@ GenerateHealthRecommendation has input HealthData
 GenerateHealthRecommendation has output HealthRecommendation
 
 ProvidePersonalizedRecommendations concerns HealthRecommendation
+
+obstacle InsufficientHealthData {
+    informalDef = "Insufficient health data prevents the generation of suitable recommendations"
+}
+
+obstacle RecommendationsIgnored
+
+requirement RequestAdditionalHealthData
+
+InsufficientHealthData obstructs GenerateRecommendations
+RecommendationsIgnored obstructs ImproveHealth
+
+RequestAdditionalHealthData resolves InsufficientHealthData

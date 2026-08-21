@@ -10,7 +10,7 @@ digraph KaosUmlProfile {
     ];
 
     node [shape=plain];
-    edge [fontsize=10];
+    edge [fontsize=16];
 
     "ImproveHealth" [
         label=
@@ -29,7 +29,7 @@ digraph KaosUmlProfile {
     </TR>
     
 <TR>
-    <TD ALIGN="LEFT">{informalDef = Users shall improve their long-term health}</TD>
+    <TD ALIGN="LEFT">{informalDef = Users shall improve their long-term<BR/>health}</TD>
 </TR>
 
 </TABLE>
@@ -54,7 +54,7 @@ digraph KaosUmlProfile {
     </TR>
     
 <TR>
-    <TD ALIGN="LEFT">{informalDef = Users shall receive personalized health recommendations}</TD>
+    <TD ALIGN="LEFT">{informalDef = Users shall receive personalized<BR/>health recommendations}</TD>
 </TR>
 
 </TABLE>
@@ -79,9 +79,30 @@ digraph KaosUmlProfile {
     </TR>
     
 <TR>
-    <TD ALIGN="LEFT">{informalDef = The system shall generate personalized health recommendations}</TD>
+    <TD ALIGN="LEFT">{informalDef = The system shall generate<BR/>personalized health recommendations}</TD>
 </TR>
 
+</TABLE>
+>
+
+    ];
+
+    "GenerateHealthRecommendation" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;kaction&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>GenerateHealthRecommendation</B></TD>
+    </TR>
+    
 </TABLE>
 >
 
@@ -129,27 +150,6 @@ digraph KaosUmlProfile {
 
     ];
 
-    "GenerateHealthRecommendation" [
-        label=
-<
-<TABLE BORDER="1"
-       CELLBORDER="0"
-       CELLSPACING="0"
-       CELLPADDING="5">
-    
-<TR>
-    <TD>&lt;&lt;kaction&gt;&gt;</TD>
-</TR>
-
-    <TR>
-        <TD><B>GenerateHealthRecommendation</B></TD>
-    </TR>
-    
-</TABLE>
->
-
-    ];
-
     "HealthAdvisor" [
         label=
 <
@@ -170,6 +170,73 @@ digraph KaosUmlProfile {
     <TD ALIGN="LEFT">{realm = software}</TD>
 </TR>
 
+</TABLE>
+>
+
+    ];
+
+    "InsufficientHealthData" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;obstacle&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>InsufficientHealthData</B></TD>
+    </TR>
+    
+<TR>
+    <TD ALIGN="LEFT">{informalDef = Insufficient health data prevents<BR/>the generation of suitable recommendations}</TD>
+</TR>
+
+</TABLE>
+>
+
+    ];
+
+    "RecommendationsIgnored" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;obstacle&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>RecommendationsIgnored</B></TD>
+    </TR>
+    
+</TABLE>
+>
+
+    ];
+
+    "RequestAdditionalHealthData" [
+        label=
+<
+<TABLE BORDER="1"
+       CELLBORDER="0"
+       CELLSPACING="0"
+       CELLPADDING="5">
+    
+<TR>
+    <TD>&lt;&lt;requirement&gt;&gt;</TD>
+</TR>
+
+    <TR>
+        <TD><B>RequestAdditionalHealthData</B></TD>
+    </TR>
+    
 </TABLE>
 >
 
@@ -228,6 +295,27 @@ digraph KaosUmlProfile {
     "HealthRecommendation" [
         label="<<concerns>>",
         
+        dir=none
+    ];
+
+    "GenerateRecommendations" ->
+    "InsufficientHealthData" [
+        label="<<obstructs>>",
+        style=dashed,
+        dir=none
+    ];
+
+    "ImproveHealth" ->
+    "RecommendationsIgnored" [
+        label="<<obstructs>>",
+        style=dashed,
+        dir=none
+    ];
+
+    "InsufficientHealthData" ->
+    "RequestAdditionalHealthData" [
+        label="<<resolves>>",
+        style=dashed,
         dir=none
     ];
 

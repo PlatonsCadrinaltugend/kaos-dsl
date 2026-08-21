@@ -39,6 +39,12 @@ enum RelationshipType(
 
     case Output extends RelationshipType("has output")
 
+    case Obstructs extends RelationshipType("obstructs")
+
+    case Refines extends RelationshipType("refines")
+
+    case Resolves extends RelationshipType("resolves")
+
 enum PropertyName(val syntax: String):
     case InformalDef extends PropertyName("informalDef")
     case FormalDef extends PropertyName("formalDef")
