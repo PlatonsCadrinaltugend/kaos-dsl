@@ -26,6 +26,18 @@ A KAOS model can be defined in model.kaos. It is the default file for the input.
 - `test` contains the automated MUnit tests
 - `visualizer` contains the visualization
 
+### Architecture
+
+The DSL is processed as follows:
+
+```mermaid
+flowchart LR
+    A[Textual Model] --> B[Parsing]
+    B --> C[Initial AST]
+    C --> D[Reference Resolution]
+    D --> E[Resolved AST]
+    E --> F[Validation]
+```
 ### DSL Syntax
 
 Elements are defined using the syntax:
@@ -45,7 +57,7 @@ The following elements are supported:
 - `agent`
 - `obstacle`
 
-Each Element can be assigned properties.
+Each element can be assigned properties.
 
 ```text 
 <concept keyword> <identifier> {
@@ -99,7 +111,15 @@ After parsing the model is validated. `validator.scala` is the entry point for t
 
 If an error is detected, the location and error category are reported. Unlike syntax errors, validation errors are collected and returned as a list after all validation steps have been performed.
 
- ### Current Limitations
+### Current Limitations
 
- - Properties can only be strings
- - The parser can only report a single syntax error at once 
+- Properties can only be strings
+- The parser can only report a single syntax error at once 
+
+### Extending the DSL
+
+The DSL can be extended by elements, relationships and properties with low effort:
+- In `Types.scala` the type has to be added,
+- In `KaosParser.scala` the keyword needs to be added to the parser,
+- When adding relationships, their allowed source and target need to be added in `validator.scala`,
+- When adding properties, the type of elements that use that property need to be restricted in `PropertyValidator`.
