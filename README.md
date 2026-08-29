@@ -30,14 +30,7 @@ A KAOS model can be defined in model.kaos. It is the default file for the input.
 
 The DSL is processed as follows:
 
-```mermaid
-flowchart LR
-    A[Textual Model] --> B[Parsing]
-    B --> C[Initial AST]
-    C --> D[Reference Resolution]
-    D --> E[Resolved AST]
-    E --> F[Validation]
-```
+<img src=assets/Architecture.svg>
 ### DSL Syntax
 
 Elements are defined using the syntax:
